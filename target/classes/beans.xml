@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--  id 名称 class Impl类路径  -->
+<!--  UserService的创建权交给了Spring  -->
+<!--    <bean id="userservice" class="com.edu.ioc.demo1.UserServiceImpl">-->
+<!--&lt;!&ndash;  依赖注入  设置属性    &ndash;&gt;-->
+<!--        <property name="name" value="苏苏"/>-->
+<!--        <property name="age" value="20"/>-->
+<!--    </bean>-->
+
+<!--&lt;!&ndash;  Bean实例化三种方式  &ndash;&gt;-->
+<!--&lt;!&ndash;  第一种：无参构造器方式  &ndash;&gt;-->
+<!--    <bean id="bean_1" class="com.edu.Bean.Bean_1"/>-->
+<!--&lt;!&ndash;  第二种：静态工厂实例化  &ndash;&gt;-->
+<!--    <bean id="bean_2" class="com.edu.Bean.Bean_2Factory" factory-method="createBean_2"/>-->
+<!--&lt;!&ndash;  第三种：实例工厂实例化  &ndash;&gt;-->
+<!--    <bean id="bean3Factory" class="com.edu.Bean.Bean_3Factory"/>-->
+<!--    <bean id="bean_3" factory-bean="bean3Factory" factory-method="createBean3"/>-->
+
+<!--    <bean id="person" class="com.edu.Bean.Bean_1" scope="singleton"/>-->
+
+<!--    <bean name="man" class="com.edu.Bean.Man" init-method="setup" destroy-method="removes">-->
+<!--        <property name="username" value="苏苏"/>-->
+<!--    </bean>-->
+
+<!--    <bean class="com.edu.Bean.MyBeanPostProcessor"/>-->
+
+<!--    <bean name="userDao" class="com.edu.Bean.UserDaoImpl"/>-->
+
+<!--  Bean  构造方法的属性注入  -->
+    <bean name="user" class="com.edu.Bean.DI.User">
+            <constructor-arg name="name" value="苏苏"/>
+            <constructor-arg name="age" value="20"/>
+    </bean>
+<!--  Bean  属性setter方法注入  -->
+    <bean name="persons" class="com.edu.Bean.DI.Persons">
+        <property name="name" value="苏酒儿"/>
+        <property name="age" value="21"/>
+        <property name="address" ref="Address"/>
+    </bean>
+    <bean name="Address" class="com.edu.Bean.DI.Address">
+        <property name="address" value="涂山"/>
+    </bean>
+</beans>
