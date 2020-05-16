@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 <!--  id 名称 class Impl类路径  -->
 <!--  UserService的创建权交给了Spring  -->
-<!--    <bean id="userservice" class="com.edu.ioc.demo1.UserServiceImpl">-->
+<!--    <bean id="userservice" class="UserServiceImpl">-->
 <!--&lt;!&ndash;  依赖注入  设置属性    &ndash;&gt;-->
 <!--        <property name="name" value="苏苏"/>-->
 <!--        <property name="age" value="20"/>-->
@@ -43,4 +44,67 @@
     <bean name="Address" class="com.edu.Bean.DI.Address">
         <property name="address" value="涂山"/>
     </bean>
+
+
+<!--  P名称空间注入  -->
+    <bean name="person" class="com.edu.Bean.DI.Persons" p:name="苏苏" p:age="20" p:address-ref="address"/>
+    <bean name="address" class="com.edu.Bean.DI.Address" p:address="涂山"/>
+
+
+
+<!-- Bean SpEL属性注入 -->
+    <bean name="spELProduct" class="com.edu.Bean.DI.SpEL_Product">
+        <property name="name" value="#{'男装'}"/>
+        <property name="price" value="#{productinfo.totalPrice()}"/>
+        <property name="spElCategory" value="#{Category}"/>
+    </bean>
+    <bean name="Category" class="com.edu.Bean.DI.SpEl_Category">
+        <property name="name" value="#{'服装'}"/>
+    </bean>
+    <bean name="productinfo" class="com.edu.Bean.DI.SpEl_ProductInfo"/>
+
+
+
+<!-- 集合类型属性注入 -->
+    <bean name="collection" class="com.edu.Bean.DI.CollectionBean">
+<!--    数组类型    -->
+        <property name="arrs">
+            <list>
+                <value>aaa</value>
+                <value>bbb</value>
+            </list>
+        </property>
+<!--    List类型    -->
+        <property name="list">
+            <list>
+                <value>111</value>
+                <value>222</value>
+            </list>
+        </property>
+<!--    Set集合属性注入    -->
+        <property name="set">
+            <set>
+                <value>苏苏</value>
+                <value>苏酒儿</value>
+            </set>
+        </property>
+<!--    Map集合属性注入    -->
+        <property name="map">
+            <map>
+                <entry key="苏苏" value="20"/>
+                <entry key="苏酒儿" value="21"/>
+            </map>
+        </property>
+<!--   Properties属性注入     -->
+        <property name="properties">
+            <props>
+                <prop key="username">苏苏</prop>
+                <prop key="password">123</prop>
+            </props>
+        </property>
+    </bean>
+
+
+
+
 </beans>

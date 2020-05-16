@@ -1,4 +1,4 @@
-package com.edu.ioc.demo1;
+package com.edu.ioc;
 
 public class UserServiceImpl implements UserService{
 

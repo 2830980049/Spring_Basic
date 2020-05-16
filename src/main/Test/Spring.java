@@ -1,8 +1,12 @@
 import com.edu.Bean.*;
+import com.edu.Bean.DI.CollectionBean;
 import com.edu.Bean.DI.Persons;
+import com.edu.Bean.DI.SpEL_Product;
 import com.edu.Bean.DI.User;
-import com.edu.ioc.demo1.UserService;
-import com.edu.ioc.demo1.UserServiceImpl;
+import com.edu.XML_Add_Annotation.ProductService;
+import com.edu.annotation.ioc_annotation;
+import com.edu.ioc.UserService;
+import com.edu.ioc.UserServiceImpl;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -91,5 +95,52 @@ public class Spring {
         Persons persons = (Persons)applicationContext.getBean("persons");
         System.out.println(persons);
     }
+
+    //DI    P名称空间属性注入
+    @Test
+    public void di3(){
+        //创建工厂
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
+        Persons persons = (Persons)applicationContext.getBean("person");
+        System.out.println(persons);
+    }
+
+    //DI    SlEl属性注入
+    @Test
+    public void di4(){
+        //创建工厂
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
+        SpEL_Product spELProduct = (SpEL_Product)applicationContext.getBean("spELProduct");
+        System.out.println(spELProduct);
+    }
+
+    //DI    集合属性注入
+    @Test
+    public void di5(){
+        //创建工厂
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
+        CollectionBean CollectionBean = (CollectionBean)applicationContext.getBean("collection");
+        System.out.println(CollectionBean);
+    }
+
+//  注解
+    @Test
+    public void annotation(){
+        //创建工厂
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans_annotation.xml");
+        ioc_annotation woman = (ioc_annotation)applicationContext.getBean("WomanService");
+        System.out.println(woman.Woman("苏苏"));
+        woman.save();
+    }
+
+    //  传统XML配置和注解配置混合使用
+    @Test
+    public void complex(){
+        //创建工厂
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans_annotation.xml");
+        ProductService productService = (ProductService)applicationContext.getBean("productService");
+        productService.save();
+    }
+
 
 }

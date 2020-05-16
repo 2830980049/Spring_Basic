@@ -1,4 +1,4 @@
-package com.edu.ioc.demo1;
+package com.edu.ioc;
 
 public interface UserService {
     public void Hello();
