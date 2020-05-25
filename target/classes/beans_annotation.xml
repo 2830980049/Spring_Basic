@@ -10,9 +10,7 @@
 <!--    <context:component-scan base-package="com.edu"/>-->
 <!--  开启注解扫描 属性扫描  -->
     <context:annotation-config/>
-    <bean name="productService" class="com.edu.XML_Add_Annotation.ProductService">
-
-    </bean>
+    <bean name="productService" class="com.edu.XML_Add_Annotation.ProductService"/>
     <bean name="productDao" class="com.edu.XML_Add_Annotation.ProductDao"/>
     <bean name="categoryDao" class="com.edu.XML_Add_Annotation.CategoryDao"/>
 </beans>

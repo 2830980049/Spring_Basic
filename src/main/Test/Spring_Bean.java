@@ -12,7 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-public class Spring {
+public class Spring_Bean {
     //传统方式开发
     @Test
     public void UserService(){
@@ -141,6 +141,8 @@ public class Spring {
         ProductService productService = (ProductService)applicationContext.getBean("productService");
         productService.save();
     }
+
+
 
 
 }

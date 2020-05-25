@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+<!-- XML配置完成AOP开发   -->
+<!-- 配置目标类   -->
+    <bean name="customerdao" class="com.edu.AspectJ.CustomerDaoImpl"/>
+
+    <!-- 配置切面类 -->
+    <bean name="myaspectxml" class="com.edu.AspectJ.MyAspectXML"/>
+
+    <!-- aop相关配置   -->
+    <aop:config>
+<!--    配置切入点    -->
+        <aop:pointcut id="savexml" expression="execution(* com.edu.AspectJ.CustomerDao.save(..))"/>
+        <aop:pointcut id="updatexml" expression="execution(* com.edu.AspectJ.CustomerDao.update(..))"/>
+        <aop:pointcut id="deletexml" expression="execution(* com.edu.AspectJ.CustomerDao.delete(..))"/>
+        <!--    配置AOP切面    -->
+        <aop:aspect ref="myaspectxml">
+    <!--    配置前置通知        -->
+            <aop:before method="before" pointcut-ref="savexml"/>
+    <!--    配置后置通知    -->
+            <aop:after-returning method="afterReturing" pointcut-ref="savexml" returning="result"/>
+    <!--    配置环绕通知    -->
+            <aop:around method="around" pointcut-ref="updatexml"/>
+    <!--    配置异常环绕通知    -->
+            <aop:after-throwing method="afterThrow" pointcut-ref="deletexml" throwing="e"/>
+    <!--    配置最终通知        -->
+            <aop:after method="after" pointcut-ref="deletexml"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

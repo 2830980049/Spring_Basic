@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--  配置目标类  -->
+    <bean name="StudentDao" class="com.edu.AOP.StudentDaoImpl"/>
+
+<!--  配置通知  -->
+    <bean name="MyArroundAdvice" class="com.edu.AOP.MyArroundAdvice"/>
+
+<!--  一般切面使用通知作为切面，因为要对目标类的某个方法进行增强就需要配置一个带有切入点的切面  -->
+    <bean name="MyAdvice" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+
+<!--    patterns中配置正则表达式：.任意字符 *任意次数    -->
+        <property name="patterns" value=".*save.*,.*update.*"/>
+        <property name="advice" ref="MyArroundAdvice"/>
+    </bean>
+
+<!--  配置产生代理  -->
+    <bean name="StudentDaoProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="StudentDao"/>
+        <property name="proxyInterfaces" value="com.edu.AOP.StudentDao"/>
+        <property name="interceptorNames" value="MyAdvice"/>
+    </bean>
+</beans>
