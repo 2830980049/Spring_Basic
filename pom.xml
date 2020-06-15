@@ -88,6 +88,12 @@
       <version>5.2.5.RELEASE</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-tx</artifactId>
+      <version>5.1.5.RELEASE</version>
+    </dependency>
+
 <!--  AspectJ  -->
     <dependency>
       <groupId>org.aspectj</groupId>
